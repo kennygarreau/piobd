@@ -37,7 +37,7 @@ unavailable.</p>
 ### Starting the Service
 
 <p>By default the software should be placed in /opt/piobd. If you chose to install this as a service using systemd, you should be able to:<br>
-edit the user and group, and install path (if you modified from /opt/piobd)
+edit the user and group, and install path (if you modified from /opt/piobd)<br>
 cp obd-runner.service /etc/systemd/system<br>
 sudo systemctl daemon-reload<br>
 sudo systemctl enable obd-runner.service<br>
