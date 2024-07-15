@@ -44,6 +44,9 @@ sudo systemctl enable obd-runner.service<br>
 sudo systemctl start obd-runner<br>
 sudo systemctl status obd-runner<br>
 </p>
+<p>At this point, the vehicle will begin reporting its telemetry data to your locally running collector, which in turn should publish to the backend.
+Of note here, you can modify how much "offline" telemetry the collector gathers, which may be very helpful in scenarios where either the in-vehicle
+wifi is unavailable, or you do not have in-vehicle wifi. Using a hotspot (eg., via your phone) is perfectly acceptable.</p>
 
 ### Getting Help
 
