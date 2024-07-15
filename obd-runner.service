@@ -1,0 +1,13 @@
+[Unit]
+Description=OBDRunner
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/piobd/obd-runner.py
+Restart=always
+RestartSec=15
+User=kennega
+Group=kennega
+
+[Install]
+WantedBy=multi-user.target
