@@ -2,6 +2,7 @@
 
 <p>Have you ever wanted to...
 </p>
+
 1. Monitor your vehicle?
 2. Read and clear DTC codes?
 3. Not have to use a proprietary app on your phone or laptop to interface with your vehicle?
@@ -17,6 +18,7 @@ Here's what you (physically) need:
 2. ELM-327/OBD-2 Adapter (this was tested using USB)
 
 ### Getting Started
+
 1. Image your Raspberry Pi using Ubuntu 20.04 (if you do NOT want to use ThousandEyes, you can use a newer ver)
 2. Install the OpenTelemetry collector (eg., https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.104.0/otelcol-contrib_0.104.0_linux_arm64.deb)
 3. Configure the collector to send to your configured backend (I work for Cisco/Splunk, shameless plug)
