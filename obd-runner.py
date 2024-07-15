@@ -337,7 +337,7 @@ if __name__ == "__main__":
             logger.info(f"DTC Codes Registered: {dtc_count}")
 
             # debug testing
-            #vin = "1C6SRFKT8MN531438"
+            #vin = "insertyour17digitvin"
 
             # obtain ISP details for filtering
             isp, latlong = get_isp()
