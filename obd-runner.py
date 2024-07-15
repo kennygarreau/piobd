@@ -49,7 +49,7 @@ tracer = trace.get_tracer("obd.tracer")
 # setup metrics
 console_metric_exporter = ConsoleMetricExporter()
 otlp_metric_exporter = OTLPMetricExporter(endpoint="http://localhost:4318/v1/metrics")
-metric_reader = PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=15000)
+metric_reader = PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=60000)
 #metric_readers = [
 #    PeriodicExportingMetricReader(console_metric_exporter, export_interval_millis=60000),
 #    PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=60000)
