@@ -49,7 +49,7 @@ tracer = trace.get_tracer("obd.tracer")
 # setup metrics
 console_metric_exporter = ConsoleMetricExporter()
 otlp_metric_exporter = OTLPMetricExporter(endpoint="http://localhost:4318/v1/metrics")
-metric_reader = PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=60000)
+metric_reader = PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=15000)
 #metric_readers = [
 #    PeriodicExportingMetricReader(console_metric_exporter, export_interval_millis=60000),
 #    PeriodicExportingMetricReader(otlp_metric_exporter, export_interval_millis=60000)
@@ -61,9 +61,9 @@ metrics.set_meter_provider(MeterProvider(
 ))
 meter = metrics.get_meter("obd.meter")
 
-responseTime = 0.0
-fuelLevel = 0.0
-vehMileage = 0.0
+#responseTime = 0.0
+#fuelLevel = 0.0
+#vehMileage = 0.0
 prefix = "vehicle"
 required_commands = [obd.commands.VIN, obd.commands.FUEL_LEVEL, obd.commands.OBD_COMPLIANCE, obd.commands.HYBRID_BATTERY_REMAINING]
 
@@ -75,15 +75,18 @@ mileage_mutex = threading.Lock()
 def register_callbacks():
     def response_time_observable_callback(options):
         with http_response_mutex:
-            return [Observation(value=responseTime, attributes=attributes)]
+            if responseTime is not None:
+                return [Observation(value=responseTime, attributes=attributes)]
 
     def fuel_level_observable_callback(options):
         with fuel_level_mutex:
-            return [Observation(value=fuelLevel, attributes=attributes)]
+            if fuelLevel is not None:
+                return [Observation(value=fuelLevel, attributes=attributes)]
 
     def mileage_observable_callback(options):
         with mileage_mutex:
-            return [Observation(value=vehMileage, attributes=attributes)]
+            if vehMileage is not None:
+                return [Observation(value=vehMileage, attributes=attributes)]
 
     responseTimeGauge = meter.create_observable_gauge(
             callbacks=[response_time_observable_callback],
@@ -348,6 +351,7 @@ if __name__ == "__main__":
                     "vehicle.model": veh_details["Model"],
                     "vehicle.year": veh_details["Model Year"],
                     "vehicle.series": veh_details["Series"],
+                    "vehicle.location": latlong,
                     "vehicle.isp": isp,
                     "vehicle.dtc.count": dtc_count
                     }
